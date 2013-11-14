@@ -3,6 +3,11 @@
 ## 担当分
 
 - 4.3. XSS
-- 7. 文字コード
+- 6. 文字コード
 
-## ディレクトリ構成
+## デモ一覧
+
+<dl>
+  <dt>20131117-tokumaru-benkyokai/sample-sites/attacker-sites/ex00_WhatIsXSS/README.md</dt>
+  <dd>XSSの初歩的な例と実害</dd>
+</dl>

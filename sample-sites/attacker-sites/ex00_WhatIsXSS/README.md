@@ -50,7 +50,7 @@ $ browser http://localhost:5000
 $ google-chrome --disable-xss-auditor "http://localhost:5000/status?uid=%3Cscript%3Ealert(%22hoge%22)%3C/script%3E"
 ```
 
-_注意: まともなブラウザなら，単純なXSS攻撃は検知して<script>実行を中止する．`--disable-xss-auditor`によってchromeにわざとXSS攻撃に引っかかってもらう．_
+_注意: まともなブラウザなら，単純なXSS攻撃は検知してscript実行を中止する．`--disable-xss-auditor`によってchromeにわざとXSS攻撃に引っかかってもらう．_
 
 ### Cookie中のセッションIDを使って脆弱サイトにログイン
 

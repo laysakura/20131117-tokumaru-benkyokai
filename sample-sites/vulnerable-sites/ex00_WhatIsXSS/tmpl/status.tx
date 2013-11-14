@@ -2,12 +2,12 @@
 
 : override content -> {
 
-<h1 style="padding: 70px; text-align: center; font-size: 80px; line-height: 1; letter-spacing: -2px;"> <: $uid :> のステータス</h1>
+<h1 style="padding: 70px; text-align: center; font-size: 80px; line-height: 1; letter-spacing: -2px;">ユーザステータス</h1>
 
 <!-- この辺でうまくエスケープしてないから脆弱 -->
 <dl>
   <dt>ID</dt>
-  <dd> <: $uid :> </dd>
+  <dd><: $uid | mark_raw :></dd>  <!-- XslateはデフォルトでHTMLのメタ文字 (< > & " &apos) をエスケープするので，それをmark_rawで抑制 -->
 
   <dt>フォロワー数</dt>
   <dd>42</dd>

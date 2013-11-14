@@ -42,6 +42,9 @@ __PACKAGE__->add_trigger(
 
         # Cache control.
         $res->header( 'Cache-Control' => 'private' );
+
+        # ブラウザのXSS検知&防止機構を無効にする
+        $res->header( 'X-XSS-Protection' => '0' );
     },
 );
 

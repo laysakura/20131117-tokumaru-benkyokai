@@ -17,11 +17,15 @@ post '/confirm' => sub {
     
     my $sid = "";
     eval {
-        # my $sid = uid, pass をDBから引いて，OKならcurrent_sidカラムを設定しつつそのsidを返す
-        $sid = "atode_nantoka_uid_${uid}_kara";
+        my @row = @{$c->dbh->selectall_arrayref(
+            "select sid from users where uid='$uid' and pass='$pass'"  # SQLインジェクション...
+        )};
+        $#row + 1 == 1 or die;
+        $sid = $row[0][0];
     };
-    if($@) {
+    if ($@) {
         # login failed
+        print "Login request from $uid failed: $@\n";
         return $c->redirect("/");
     }
     return $c->redirect("/login?sid=$sid");
@@ -30,8 +34,19 @@ post '/confirm' => sub {
 get '/login' => sub {
     my $c = shift;
     my $sid = $c->req->param('sid');
-    # my $uid = sidからuidをDBでひく
-    my $uid = "sid_${sid}_kara_db_hiku";
+    my $uid = "";
+    eval {
+        my @row = @{$c->dbh->selectall_arrayref(
+            "select uid from users where sid='$sid'"  # SQLインジェクション...
+        )};
+        $#row + 1 == 1 or die;
+        $uid = $row[0][0];
+    };
+    if ($@) {
+        # login failed
+        print "Login request with $sid failed: $@\n";
+        return $c->redirect("/");
+    }
     return $c->render('login.tx', {
         uid => $uid,
     });

@@ -55,7 +55,6 @@ get '/login' => sub {
 get '/status' => sub {
     my $c = shift;
     my $uid  = $c->req->param('uid');
-    print "uid = $uid\n";
     return $c->render('status.tx', {
         uid => $uid,
     });

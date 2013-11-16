@@ -5,6 +5,10 @@
 - 4.3. XSS
 - 6. 文字コード
 
+## プレゼン資料
+
+http://laysakura.github.io/20131117-tokumaru-benkyokai/presentation
+
 ## デモ一覧
 
 <dl>

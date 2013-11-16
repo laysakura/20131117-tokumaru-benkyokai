@@ -21,7 +21,7 @@
 
 ---
 
-## XSS攻撃が成立した理由(1)
+## XSS攻撃が成立した理由
 
 - `脆弱サイト.com/status` において，ユーザの入力値がエスケープなしに使用されていた
 
@@ -47,15 +47,13 @@ get '/status' => sub {
 </dl>
 ```
 
----
 
-## XSS攻撃が成立した理由(2)
+## XSS攻撃が成立した理由
 
 `<: $uid | mark_raw :>`の部分には`<script>`タグを入れることが可能なので，その中で**任意のJSコード**が実行されてしまう．
 
----
 
-## XSS攻撃が成立した理由(3)
+## XSS攻撃が成立した理由
 
 今回の「任意のJSコード」は，以下のようなものだった．
 
@@ -71,9 +69,52 @@ get '/status' => sub {
 ## 今日やること
 
 1. XSS最初の体験&解説 ([ex00](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/attacker-sites/ex00_WhatIsXSS): 済み)
-1. XSSの肝 ([ex01](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/attacker-sites/ex01_iframe), [ex02](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/vulnerable-sites/ex02_PostOmanchin))
+1. XSSの肝 ([ex02](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/vulnerable-sites/ex02_PostOmanchin))
 1. クイズで覚える! パターン別XSS脆弱性対策
 1. おまけ: JSを使わないXSS ([ex03](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/attacker-sites/ex03_FormOverride))
+
+---
+
+# XSSの肝
+
+---
+
+## XSSの分解
+
+1. 攻撃者が任意のJSコードを脆弱サイトに注入
+1. 被害者が攻撃者の注入したJSコードを脆弱サイトにて実行
+1. (JSコードに応じて)何か嫌なことが起こる
+
+---
+
+## 攻撃者がJSコードを注入
+
+反射型
+
+
+## 攻撃者がJSコードを注入
+
+持続型
+
+---
+
+## 被害者がJSコードを実行
+
+- 反射型: リンク踏んだり
+- 持続型: ページ表示したり
+
+---
+
+## (JSコードに応じて)何か嫌なことが起こる
+
+- 被害者の持つ情報が盗まれる
+  - Cookie ([ex00](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/attacker-sites/ex00_WhatIsXSS))
+  - 個人情報，クレカ番号 ([ex01](https://github.com/laysakura/20131117-tokumaru-benkyokai/tree/gh-pages/sample-sites/attacker-sites/ex01_FormOverride))
+
+- 被害者の意図していない情報を発信してしまう
+  - ぼくはまちちゃん
+
+- ...
 
 ---
 

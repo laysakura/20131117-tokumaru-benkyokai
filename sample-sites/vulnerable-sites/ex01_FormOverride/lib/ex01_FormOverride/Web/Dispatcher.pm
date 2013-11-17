@@ -6,24 +6,18 @@ use Amon2::Web::Dispatcher::RouterBoom;
 
 any '/' => sub {
     my ($c) = @_;
-    my $counter = $c->session->get('counter') || 0;
-    $counter++;
-    $c->session->set('counter' => $counter);
+    my $name  = $c->req->param('name');
+    my $email = $c->req->param('email');
     return $c->render('index.tx', {
-        counter => $counter,
+        name  => $name,
+        email => $email,
     });
 };
 
-post '/reset_counter' => sub {
-    my $c = shift;
-    $c->session->remove('counter');
-    return $c->redirect('/');
-};
-
-post '/account/logout' => sub {
+post '/register' => sub {
     my ($c) = @_;
-    $c->session->expire();
-    return $c->redirect('/');
+    return $c->render('register.tx', {
+    });
 };
 
 1;

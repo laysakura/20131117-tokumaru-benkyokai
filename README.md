@@ -11,5 +11,5 @@ http://laysakura.github.io/20131117-tokumaru-benkyokai/presentation
 
 ## デモ一覧
 
-- [/sample-sites/attacker-sites/ex00_WhatIsXSS/README.md](XSSの初歩的な例と実害)
-- [/sample-sites/attacker-sites/ex01_FormOverride/README.md](JSなしで個人情報を盗まれる例)
+- [XSSの初歩的な例と実害](/sample-sites/attacker-sites/ex00_WhatIsXSS/README.md)
+- [JSなしで個人情報を盗まれる例](/sample-sites/attacker-sites/ex01_FormOverride/README.md)

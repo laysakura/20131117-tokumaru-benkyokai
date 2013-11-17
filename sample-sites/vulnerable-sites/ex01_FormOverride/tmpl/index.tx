@@ -4,7 +4,7 @@
 
 <h1 style="padding: 70px; text-align: center; font-size: 80px; line-height: 1; letter-spacing: -2px;">入力画面</h1>
 
-<form>
+<form action="/register" method="POST">
     氏名<input name="name" value="<: $name | mark_raw :>"> <br />
     メール<input name="email" value="<: $email | mark_raw :>"> <br />
     <input type="submit">

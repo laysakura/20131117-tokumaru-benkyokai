@@ -13,3 +13,15 @@ http://laysakura.github.io/20131117-tokumaru-benkyokai/presentation
 
 - [XSSの初歩的な例と実害](/sample-sites/attacker-sites/ex00_WhatIsXSS/README.md)
 - [JSなしで個人情報を盗まれる例](/sample-sites/attacker-sites/ex01_FormOverride/README.md)
+
+## 予めやっておいてほしいこと
+
+Amon2の依存パッケージが多くてinstallに時間かかるので・・・
+
+```bash
+$ cd 20131117-tokumaru-benkyokai/sample-sites/attacker-sites/ex00_WhatIsXSS
+$ carton install
+
+$ cd 20131117-tokumaru-benkyokai/sample-sites/attacker-sites/ex01_FormOverride
+$ carton install
+```
